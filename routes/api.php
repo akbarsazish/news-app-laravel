@@ -23,6 +23,7 @@ use App\Http\Controllers\LoginController;
 
 
 Route::post('/login',[LoginController::class,'loginUser']);
+Route::post('/register',[LoginController::class,'register']);
 
 
 // Route::group(['middleware' => 'auth:sanctum'],function(){
