@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -15,13 +14,11 @@ use Validator;
 
 class LoginController extends Controller
 {
-
     // public function login(Request $request) {
     //     $credentials = $request->validate([
     //         'email' => 'required',
     //         'password' => 'required',
     //     ]);
-
     //     if (! auth()::attempt($credentials)) {
     //         throw ValidationException::withMessages([
     //             'email' => [
@@ -31,11 +28,9 @@ class LoginController extends Controller
     //     }
     //     return $request->user();
     // }
-
     // public function logout(Request $request){
     //    return auth()->logout();
     // }
-
     // public function csrfCookie(Request $request) {
     //     return response()->json(['message' => 'CSRF cookie set']);
     // }
@@ -74,7 +69,6 @@ class LoginController extends Controller
         //     'email' => 'required|email|unique:users',
         //     'password' => 'required|string|min:3|confirmed',
         // ]);
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -85,14 +79,12 @@ class LoginController extends Controller
 
         return response()->json(['token' => $token], 201);
     }
-
     /**
      * Store a newly created resource in storage.
      */
     public function userDetails(): Response
     {
         if (Auth::check()) {
-
             $user = Auth::user();
 
             return Response(['data' => $user], 200);
@@ -100,16 +92,13 @@ class LoginController extends Controller
 
         return Response(['data' => 'Unauthorized'], 401);
     }
-
     /**
      * Display the specified resource.
      */
     public function logout(): Response
     {
         $user = Auth::user();
-
         $user->currentAccessToken()->delete();
-
         return Response(['data' => 'User Logout successfully.'], 200);
     }
 }
