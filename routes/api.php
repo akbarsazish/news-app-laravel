@@ -28,7 +28,7 @@ Route::post('/register', [LoginController::class, 'register']);
 Route::post('/createNews', [NewsController::class, 'createNews']);
 
 
-// Route::group(['middleware' => 'auth:sanctum'],function(){
-//     Route::get('user',[LoginController::class,'userDetails']);
-//     Route::get('logout',[LoginController::class,'logout']);
-// }); 
+Route::group(['middleware' => 'auth:sanctum'], function () {
+ Route::get('user', [LoginController::class, 'userDetails']);
+ Route::post('logout', [LoginController::class, 'logout']);
+});
