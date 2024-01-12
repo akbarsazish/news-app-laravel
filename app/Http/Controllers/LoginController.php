@@ -61,24 +61,33 @@ class LoginController extends Controller
     }
 
     //register user
-    public function register(Request $request)
-    {
-
-        // $request->validate([
-        //     'name' => 'required|string',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required|string|min:3|confirmed',
-        // ]);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json(['token' => $token], 201);
+    public function register(Request $request) {
+        try {
+            // $request->validate([
+            //     'name' => 'required|string',
+            //     'email' => 'required|email|unique:users',
+            //     'password' => 'required|min:3|confirmed',
+            // ]);
+    
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+    
+            $token = $user->createToken('auth_token')->plainTextToken;
+    
+            return response()->json(['token' => $token], 201);
+            
+        } catch (ValidationException $e) {
+            // Handle validation errors
+            return response()->json(['error' => $e->errors()], 422);
+        } catch (\Exception $e) {
+            // Handle other exceptions
+            return response()->json(['error' => 'Something went wrong. Please try again.'], 500);
+        }
     }
+
     /**
      * Store a newly created resource in storage.
      */
