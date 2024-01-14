@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-
+use App\Http\Controllers\NewsController;
 
 // Route::post('/sanctum/csrf-cookie', [LoginController::class, 'csrfCookie']);
 

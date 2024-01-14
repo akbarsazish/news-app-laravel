@@ -9,18 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void {
-        Schema::create('news_articles', function (Blueprint $table) {
-        $table->bigIncrements('id');
-       
-        $table->unsignedInteger('source_id')->nullable();
-            $table->string('author');
+    public function up(): void
+    {
+        Schema::create('news', function (Blueprint $table) {
+            $table->bigIncrements('id');
+
+            $table->string('author')->nullable();
             $table->string('title');
-            $table->longText('description');
+            $table->longText('content');
+            $table->longText('description')->nullable();
             $table->string('url');
             $table->string('url_to_image')->nullable();
-            $table->datetime('published_at');
-            $table->longText('content');
             $table->timestamps();
         });
     }
